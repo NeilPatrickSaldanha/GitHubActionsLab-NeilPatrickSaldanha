@@ -1,0 +1,58 @@
+name: Multi-Platform Testing Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ubuntu-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Print OS Info
+        run: |
+          echo "Testing on Ubuntu"
+          uname -a
+      
+      - name: Create Test File
+        run: echo "Ubuntu test completed" > ubuntu-test.txt
+      
+      - name: Display File Contents
+        run: cat ubuntu-test.txt
+
+  windows-job:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Print OS Info
+        run: |
+          echo "Testing on Windows"
+          systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+      
+      - name: Create Test File
+        run: echo "Windows test completed" > windows-test.txt
+      
+      - name: Display File Contents
+        run: type windows-test.txt
+
+  macos-job:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Print OS Info
+        run: |
+          echo "Testing on macOS"
+          uname -a
+      
+      - name: Create Test File
+        run: echo "macOS test completed" > macos-test.txt
+      
+      - name: Display File Contents
+        run: cat macos-test.txt
